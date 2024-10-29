@@ -2,6 +2,15 @@ import unittest
 from data_structures import *
 
 class MyTestCase(unittest.TestCase):
+    def test_generate_random_list(self):
+        self.assertTrue(len(generate_random_list(5)) == 5)
+        with self.assertRaises(ValueError):
+            generate_random_list(0)
+            generate_random_list(-1)
+        for number in generate_random_list(5):
+            self.assertTrue(number <= 100)
+            self.assertTrue(number >= 0)
+
     def test_find_max(self):
         self.assertEqual(find_max([1, 3, 5, 7, 9]), 9)
         self.assertEqual(find_max([-1, -3, -5, -7]), -1)
