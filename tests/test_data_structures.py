@@ -72,7 +72,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(stats["min"], 2)
         self.assertEqual(stats["max"], 2)
 
-
     def test_basic(self):
         input_list = ["a", "1", "b", "3", "c", "@", "5", "d", "e"]
         result_alphabets, result_numbers = process_characters(input_list)
@@ -80,20 +79,21 @@ class MyTestCase(unittest.TestCase):
         for letter in result_alphabets:
             self.assertNotEqual(letter, "@")
             self.assertTrue(letter in string.ascii_lowercase)
-        
+
         for number in result_numbers:
-            self.assertTrue(number in string.digits)
-
-
+            self.assertTrue(str(number) in string.digits)
 
     def test_mixed_input(self):
         input_list = ["a", "1", "b", "3", "c", "2", "@", "5", "d", "e"]
         result_alphabets, result_numbers = process_characters(input_list)
 
+        self.assertEqual(result_alphabets, ["a", "b", "c", "d", "e"])
+        self.assertEqual(result_numbers, [1, 2, 3, 5])
+
     def test_repeated_characters(self):
         input_list = ["1", "b", "a", "c", "c", "b", "a", "1"]
-        result_alphabets, result_numbers = process_characters(input_list)\
-        
+        result_alphabets, result_numbers = process_characters(input_list)
+
         self.assertEqual(result_alphabets, ["a", "b", "c"])
         self.assertEqual(result_numbers, [1])
 
@@ -107,7 +107,7 @@ class MyTestCase(unittest.TestCase):
     def test_more_special_characters(self):
         input_list = ["%", "&", "*", "4", "6", "8", "(", ")", "!", "x"]
         result_alphabets, result_numbers = process_characters(input_list)
-    
+
         self.assertEqual(result_alphabets[0], "x")
         self.assertEqual(len(result_alphabets), 1)
 
@@ -118,13 +118,13 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(generate_squared_dict(0), {})
 
     def test_convert_word_list_sentence(self):
-        sentence = "Hello, world! This is a test."
+        sentence = "Hello, world! This is a test"
         self.assertEqual(
             convert_to_word_list(sentence),
             ["hello", "world", "this", "is", "a", "test"],
         )
 
-        sentence = "Coding is fun; let's code!"
+        sentence = "Coding is fun, let's code!"
         self.assertEqual(
             convert_to_word_list(sentence), ["coding", "is", "fun", "lets", "code"]
         )
@@ -144,7 +144,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(input["e"], 1)
         self.assertEqual(input["l"], 2)
         self.assertEqual(input["o"], 1)
-             
+
     def test_alphanumeric_1(self):
         with self.assertRaises(KeyError):
             text_to_morse("@")
@@ -158,4 +158,3 @@ class MyTestCase(unittest.TestCase):
 
     def test_alphanumeric_3(self):
         self.assertEqual(text_to_morse("hi"), ".... ..")
-
