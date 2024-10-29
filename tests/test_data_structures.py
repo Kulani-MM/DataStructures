@@ -146,10 +146,16 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(input["o"], 1)
              
     def test_alphanumeric_1(self):
-        pass
+        with self.assertRaises(KeyError):
+            text_to_morse("@")
+            text_to_morse("%")
+            text_to_morse("#")
+            text_to_morse("$")
 
     def test_alphanumeric_2(self):
-        pass
+        self.assertEqual(text_to_morse(""), "")
+        self.assertEqual(text_to_morse(" "), " ")
 
     def test_alphanumeric_3(self):
-        pass
+        self.assertEqual(text_to_morse("hi"), ".... ..")
+
