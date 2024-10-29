@@ -8,6 +8,10 @@ def generate_random_list(length):
      Output: [81, 96, 77, 64, 49]
         >>>
     """
+
+    if length < 1:
+        raise ValueError("Length is not valid")
+    
     return [random.randint(0, 100) for number in range(length)]
 
 def find_max(numbers):
